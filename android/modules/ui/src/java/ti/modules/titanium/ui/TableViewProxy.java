@@ -967,6 +967,24 @@ public class TableViewProxy extends TiViewProxy
 		}
 	}
 
+	@Kroll.getProperty @Kroll.method
+	public Object getFirstVisibleItem()
+	{
+	    return getTableView().getTableView().getFirstVisibleItem();
+	}
+
+	@Kroll.getProperty @Kroll.method
+	public Object getVisibleItemCount()
+	{
+	    return getTableView().getTableView().getVisibleItemCount();
+	}
+
+	@Kroll.getProperty @Kroll.method
+	public Object getTotalItemCount()
+	{
+	    return getTableView().getTableView().getTotalItemCount();
+	}
+
 	@Override
 	public String getApiName()
 	{

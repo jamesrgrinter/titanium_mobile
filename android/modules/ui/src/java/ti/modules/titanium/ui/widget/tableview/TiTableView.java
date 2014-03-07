@@ -66,6 +66,11 @@ public class TiTableView extends FrameLayout
 	private boolean filterCaseInsensitive = true;
 	private StateListDrawable selector;
 
+        // stash these from onScroll, for read-only retrieval
+        private int pFirstVisibleItem = 0;
+        private int pVisibleItemCount = 0;
+        private int pTotalItemCount = 0;
+
 	public interface OnItemClickedListener {
 		public void onClick(KrollDict item);
 	}
@@ -285,7 +290,7 @@ public class TiTableView extends FrameLayout
 		{
 			private boolean scrollValid = false;
 			private int lastValidfirstItem = 0;
-			
+
 			@Override
 			public void onScrollStateChanged(AbsListView view, int scrollState)
 			{
@@ -315,6 +320,9 @@ public class TiTableView extends FrameLayout
 					//we must check to see if the first visibleItem has changed.
 					fireScroll = (lastValidfirstItem != firstVisibleItem);
 				}
+				pFirstVisibleItem = firstVisibleItem;
+				pVisibleItemCount = visibleItemCount;
+				pTotalItemCount = totalItemCount;
 				if(fireScroll) {
 					lastValidfirstItem = firstVisibleItem;
 					KrollDict eventArgs = new KrollDict();
@@ -581,4 +589,20 @@ public class TiTableView extends FrameLayout
 			}
 		}
 	}
+
+	public int getFirstVisibleItem()
+	{
+	    return pFirstVisibleItem;
+	}
+
+	public int getVisibleItemCount()
+	{
+	    return pVisibleItemCount;
+	}
+
+	public int getTotalItemCount()
+	{
+	    return pTotalItemCount;
+	}
+
 }
